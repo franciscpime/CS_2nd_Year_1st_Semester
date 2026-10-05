@@ -19,7 +19,7 @@ plot <- ggplot(
 ggsave(
     "visualization.png",
     plot = plot,
-    width = 1200,
-    height = 900,
+    width = 3000,
+    height = 2000,
     units = "px"
 )
