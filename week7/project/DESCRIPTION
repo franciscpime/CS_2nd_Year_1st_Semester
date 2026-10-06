@@ -1,0 +1,11 @@
+Package: studenttools
+Title: Students Grade Classifier
+Description: A package designed to evaluate student grades. It calculates the average of eight subject grades, converts the resulting average into a letter grade, and determines whether the student passed or failed.
+Version: 0.1.0
+Authors@R: person("Francisco", "Pimentel", email = "franciscpimentel5@gmail.com", role = c("aut", "cre"))
+License: MIT + file LICENSE
+Video: https://youtu.be/tyC8zu5AkRw
+Imports: tibble, dplyr
+Suggests: testthat
+YEAR: 2026
+COPYRIGHT HOLDER: Francisco Pimentel
