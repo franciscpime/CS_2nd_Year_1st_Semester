@@ -1,15 +1,41 @@
 gender <- read.delim("tests.tsv")
 
-gender$gender <- ifelse(gender$gender == 1, "Male", 
-                    ifelse(gender$gender == 2, "Female",
-                        ifelse(gender$gender == 3, "Other",
-                            ifelse(gender$gender == 0, "Unanswered", gender$gender))))
+# Replace gender codes with descriptive labels
+gender$gender <- with(
+  gender,
+  ifelse(
+    gender == 1, "Male",
+    ifelse(
+      gender == 2, "Female",
+      ifelse(
+        gender == 3, "Other",
+        ifelse(gender == 0, "Unanswered", gender)
+      )
+    )
+  )
+)
 
-gender$extroversion <- round((gender$E1 + gender$E2 + gender$E3) / 15, 2)
-gender$neuroticism <- round((gender$N1 + gender$N2 + gender$N3) / 15, 2)
-gender$agreeableness <- round((gender$A1 + gender$A2 + gender$A3) / 15, 2)
-gender$conscientiousness <- round((gender$C1 + gender$C2 + gender$C3) / 15, 2)
-gender$openness <- round((gender$O1 + gender$O2 + gender$O3) / 15, 2)
+# Calculate each personality score by dividing the sum of its three items
+# by 15, then rounding the result to two decimal places
+gender$extroversion <- round(
+  (gender$E1 + gender$E2 + gender$E3) / 15, 2
+)
+
+gender$neuroticism <- round(
+  (gender$N1 + gender$N2 + gender$N3) / 15, 2
+)
+
+gender$agreeableness <- round(
+  (gender$A1 + gender$A2 + gender$A3) / 15, 2
+)
+
+gender$conscientiousness <- round(
+  (gender$C1 + gender$C2 + gender$C3) / 15, 2
+)
+
+gender$openness <- round(
+  (gender$O1 + gender$O2 + gender$O3) / 15, 2
+)
 
 write.csv(gender, "analysis.csv", row.names = FALSE)
 # View(gender)

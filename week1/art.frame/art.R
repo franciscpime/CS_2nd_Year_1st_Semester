@@ -1,3 +1,4 @@
+# Create a data frame representing a diamond pattern
 art <- data.frame(
   A = c(" ", " ", "1", " ", " "),
   B = c(" ", "1", " ", "1", " "),

@@ -1,37 +1,60 @@
 bus <- read.csv("bus.csv")
 rail <- read.csv("rail.csv")
-
 route <- readline("Route: ")
 
-numerator <- rail$numerator
-
 if (route %in% rail$route) {
-    # Rail
-    color <- which(rail$route == route)
-    color_numerator <- rail$numerator[color]
-    color_denominator <- rail$denominator[color]
-    reliability <- color_numerator / color_denominator
-    peak <- which(rail$peak[color] == "PEAK")
-    average_peak <- paste0(round(mean(reliability[peak]) * 100, 0), "%")
-    off_peak <- which(rail$peak[color] == "OFF_PEAK")
-    average_off_peak <- paste0(round(mean(reliability[off_peak]) * 100, 0), "%")
+  # Select all rail records for the requested route
+  route_rows <- which(rail$route == route)
+  route_data <- rail[route_rows, ]
 
-    print(paste("On time", average_peak ,"of the time during peak hours."))
-    print(paste("On time", average_off_peak ,"of the time during off-peak hours."))
+  # Calculate the on-time reliability for each record
+  reliability <- route_data$numerator / route_data$denominator
+
+  # Calculate the average reliability during peak hours
+  peak <- which(route_data$peak == "PEAK")
+  average_peak <- paste0(
+    round(mean(reliability[peak]) * 100, 0),
+    "%"
+  )
+
+  # Calculate the average reliability during off-peak hours
+  off_peak <- which(route_data$peak == "OFF_PEAK")
+  average_off_peak <- paste0(
+    round(mean(reliability[off_peak]) * 100, 0),
+    "%"
+  )
+
+  # Display the reliability summary
+  print(paste("On time", average_peak, "of the time during peak hours."))
+  print(paste("On time", average_off_peak, "of the time during off-peak hours."))
+
 } else if (route %in% bus$route) {
-    # Bus
-    number <- which(bus$route == route)
-    bus_numerator <- bus$numerator[number]
-    bus_denominator <- bus$denominator[number]
-    reliability <- bus_numerator / bus_denominator
-    peak <- which(bus$peak[number] == "PEAK")
-    average_peak <- paste0(round(mean(reliability[peak]) * 100, 0), "%")
-    off_peak <- which(bus$peak[number] == "OFF_PEAK")
-    average_off_peak <- paste0(round(mean(reliability[off_peak]) * 100, 0), "%")
+  # Select all bus records for the requested route
+  route_rows <- which(bus$route == route)
+  route_data <- bus[route_rows, ]
 
-    print(paste("On time", average_peak ,"of the time during peak hours."))
-    print(paste("On time", average_off_peak ,"of the time during off-peak hours."))
+  # Calculate the on-time reliability for each record
+  reliability <- route_data$numerator / route_data$denominator
+
+  # Calculate the average reliability during peak hours
+  peak <- which(route_data$peak == "PEAK")
+  average_peak <- paste0(
+    round(mean(reliability[peak]) * 100, 0),
+    "%"
+  )
+
+  # Calculate the average reliability during off-peak hours
+  off_peak <- which(route_data$peak == "OFF_PEAK")
+  average_off_peak <- paste0(
+    round(mean(reliability[off_peak]) * 100, 0),
+    "%"
+  )
+
+  # Display the reliability summary
+  print(paste("On time", average_peak, "of the time during peak hours."))
+  print(paste("On time", average_off_peak, "of the time during off-peak hours."))
+
 } else {
-    print("Input a valid route")
+  # Notify the user if the route is absent from both datasets
+  print("Input a valid route")
 }
-

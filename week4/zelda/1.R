@@ -1,6 +1,8 @@
 library(tidyverse)
 zelda <- read_csv("zelda.csv")
 
+# Create a column for each role, split release information into
+# year and system, and convert all column names to lowercase
 zelda <- pivot_wider(
             zelda, 
             id_cols = c(title, release),

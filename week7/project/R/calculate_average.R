@@ -4,6 +4,7 @@ calculate_average <- function(grades) {
 
     average <- mean(grades)
 
+    # Create a table pairing each subject with its grade
     student_info <- tibble::tibble(
         Subjects = subjects,
         Grades = grades
